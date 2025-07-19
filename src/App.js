@@ -1,23 +1,21 @@
-import React, { useState } from "react";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
+import React, { useState } from 'react';
+import PasswordForm from './components/PasswordForm';
+import PasswordList from './components/PasswordList';
 
 function App() {
-  const [showLogin, setShowLogin] = useState(true);
+  const [passwords, setPasswords] = useState([]);
+
+  const addPassword = (entry) => {
+    setPasswords([...passwords, entry]);
+  };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>{showLogin ? "Login" : "Sign Up"}</h1>
-      {showLogin ? <Login /> : <Signup />}
-      <p>
-        {showLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-        <button onClick={() => setShowLogin(!showLogin)}>
-          {showLogin ? "Sign Up" : "Login"}
-        </button>
-      </p>
+    <div className="App">
+      <h1>Password Manager</h1>
+      <PasswordForm onAdd={addPassword} />
+      <PasswordList passwords={passwords} />
     </div>
   );
 }
 
 export default App;
-
